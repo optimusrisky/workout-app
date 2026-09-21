@@ -1,0 +1,56 @@
+name: 新規機能
+description: 新しい機能を実装する
+title: "feat: "
+body:
+  - type: dropdown
+    id: release
+    attributes:
+      label: リリース段階
+      options:
+        - R1 記録できる
+        - R2 続けたくなる
+        - R3 振り返れる
+    validations:
+      required: true
+  - type: textarea
+    id: background
+    attributes:
+      label: 背景・目的
+      description: なぜこの機能が必要か。ユーザーのどんな課題を解決するか
+    validations:
+      required: true
+  - type: textarea
+    id: requirements
+    attributes:
+      label: 要件
+      description: 実現すること。画面・操作・データの観点で書く
+      placeholder: |
+        - [ ]
+        - [ ]
+    validations:
+      required: true
+  - type: textarea
+    id: out-of-scope
+    attributes:
+      label: スコープ外
+      description: このissueでやらないこと
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: 完了条件
+      description: 何ができれば完了か。動作確認の観点も含める
+      placeholder: |
+        - [ ]
+        - [ ] `pnpm lint` / `pnpm check` / `pnpm build` が通る
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: 実装メモ・懸念
+      description: 技術的な方針、影響範囲、セキュリティ（体重・体調は機微情報）、実機検証（iOS等）の要否など
+  - type: textarea
+    id: related
+    attributes:
+      label: 関連
+      description: 関連issue、要件検討メモの該当箇所など
