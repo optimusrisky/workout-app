@@ -1,0 +1,27 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -r '.tool_input.file_path // .tool_response.filePath // empty' | { read -r f; case \"$f\" in *.ts|*.tsx|*.js|*.jsx) npx eslint --fix \"$f\";; esac; npx biome check --write \"$f\"; } 2>/dev/null || true",
+            "statusMessage": "Running eslint --fix / biome check"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -r '.tool_input.command // empty' | { read -r cmd; reason=''; case \"$cmd\" in *'rm -rf'*) reason='rm -rf: ファイルを完全に削除します';; *'git push'*'--force'*|*'git push'*' -f'*) reason='force push: リモートの履歴を上書きします';; *'git reset --hard'*) reason='git reset --hard: 未コミットの変更が失われます';; *'git clean -f'*) reason='git clean -f: 未追跡ファイルが削除されます';; *'migrate reset'*|*'DROP TABLE'*|*'DROP DATABASE'*) reason='DBスキーマを破壊する可能性がある操作です';; esac; if [ -n \"$reason\" ]; then printf '{\"hookSpecificOutput\":{\"hookEventName\":\"PreToolUse\",\"permissionDecision\":\"ask\",\"permissionDecisionReason\":\"%s\"}}' \"$reason\"; fi; }"
+          }
+        ]
+      }
+    ]
+  }
+}
