@@ -6,8 +6,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "jq -r '.tool_input.file_path // .tool_response.filePath // empty' | { read -r f; case \"$f\" in *.ts|*.tsx|*.js|*.jsx) npx eslint --fix \"$f\";; esac; } 2>/dev/null || true",
-            "statusMessage": "Running eslint --fix"
+            "command": "jq -r '.tool_input.file_path // .tool_response.filePath // empty' | { read -r f; case \"$f\" in *.ts|*.tsx|*.js|*.jsx) npx eslint --fix \"$f\";; esac; npx biome check --write \"$f\"; } 2>/dev/null || true",
+            "statusMessage": "Running eslint --fix / biome check"
           }
         ]
       }
