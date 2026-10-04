@@ -42,3 +42,7 @@ next-env.d.ts
 
 # obsidian
 /docs/.obsidian/*.json
+
+# 個人用備忘録メモ(コミット不要)
+/memo/
+.env*.local

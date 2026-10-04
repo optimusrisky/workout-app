@@ -6,7 +6,7 @@
     "useIgnoreFile": true
   },
   "files": {
-    "includes": ["**", "!public", "!docs"]
+    "includes": ["**", "!public", "!docs", "!.claude/settings.local.json"]
   },
   "formatter": {
     "enabled": true,
